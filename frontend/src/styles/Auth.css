@@ -1,0 +1,108 @@
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.auth-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(5, 20, 26, 0.64), rgba(8, 31, 24, 0.7)),
+    url("../assets/bg/bg1.jpeg");
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.9) contrast(1.02);
+}
+
+.auth-page.login-page::before {
+  background:
+    linear-gradient(rgba(5, 20, 26, 0.58), rgba(8, 31, 24, 0.68)),
+    url("../assets/bg3.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 430px;
+  padding: 28px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.auth-card h1 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+}
+
+.auth-card p {
+  margin: 0 0 18px;
+  color: rgba(245, 247, 246, 0.85);
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-card label {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.auth-card input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.12);
+  color: #f5f7f6;
+}
+
+.auth-card input::placeholder {
+  color: rgba(245, 247, 246, 0.65);
+}
+
+.auth-card button {
+  margin-top: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2ec27e, #1493d4);
+  color: #f5f7f6;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-card button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  margin: 2px 0 0;
+  color: #ffd8d8;
+  font-size: 0.9rem;
+}
+
+.auth-switch {
+  margin-top: 18px;
+  font-size: 0.92rem;
+}
+
+.auth-switch a {
+  color: #8ff0c0;
+  font-weight: 700;
+}

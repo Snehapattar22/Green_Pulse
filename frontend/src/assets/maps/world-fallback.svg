@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000" role="img" aria-label="World map fallback">
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a5263"/>
+      <stop offset="100%" stop-color="#113947"/>
+    </linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6bb88e"/>
+      <stop offset="100%" stop-color="#3f7f67"/>
+    </linearGradient>
+  </defs>
+  <rect width="2000" height="1000" fill="url(#ocean)"/>
+  <path d="M170 230 L260 160 L420 160 L500 240 L470 330 L390 410 L330 500 L250 600 L170 640 L120 580 L120 470 L90 390 L120 300 Z" fill="url(#land)"/>
+  <path d="M520 690 L600 650 L670 670 L710 760 L660 860 L570 850 L520 780 Z" fill="url(#land)"/>
+  <path d="M860 180 L980 150 L1110 160 L1180 230 L1140 280 L1000 300 L900 260 Z" fill="url(#land)"/>
+  <path d="M980 320 L1080 300 L1160 340 L1210 460 L1190 610 L1110 740 L1020 780 L950 710 L920 580 L900 470 L910 380 Z" fill="url(#land)"/>
+  <path d="M1190 250 L1280 190 L1430 170 L1580 220 L1690 290 L1760 360 L1740 430 L1650 450 L1540 420 L1480 370 L1390 350 L1320 390 L1260 450 L1190 430 L1130 360 Z" fill="url(#land)"/>
+  <path d="M1500 560 L1580 540 L1660 580 L1700 650 L1660 730 L1560 760 L1490 700 L1470 620 Z" fill="url(#land)"/>
+</svg>

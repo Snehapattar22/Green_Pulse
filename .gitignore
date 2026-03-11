@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Firebase secret key
+firebase_key.json
+
+# Node / frontend
+node_modules/
+
+# Vite build files
+dist/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Virtual environments
+venv/
+env/
