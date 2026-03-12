@@ -1,7 +1,27 @@
 import axios from "axios";
 
+const trimTrailingSlashes = (value) => value.replace(/\/+$/, "");
+
+const resolveApiBaseUrl = () => {
+  const envBase = import.meta.env.VITE_API_BASE_URL;
+  if (envBase && envBase.trim()) {
+    const normalized = trimTrailingSlashes(envBase.trim());
+    return normalized.endsWith("/api") ? normalized : `${normalized}/api`;
+  }
+
+  if (import.meta.env.DEV) {
+    return "http://localhost:5000/api";
+  }
+
+  if (typeof window !== "undefined") {
+    return `${window.location.origin}/api`;
+  }
+
+  return "/api";
+};
+
 const API = axios.create({
-  baseURL: "http://localhost:5000/api"
+  baseURL: resolveApiBaseUrl(),
 });
 
 export const getLatestData = () => API.get("/latest");
