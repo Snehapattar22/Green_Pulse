@@ -14,9 +14,13 @@
   color: var(--text-main);
   font-family: "Manrope", sans-serif;
   background:
+    linear-gradient(rgba(4, 22, 16, 0.72), rgba(10, 35, 27, 0.7)),
+    url("../assets/bg/bg5.jpeg"),
     radial-gradient(circle at 16% 10%, rgba(64, 185, 137, 0.24), transparent 36%),
     radial-gradient(circle at 86% 18%, rgba(46, 197, 232, 0.18), transparent 38%),
     linear-gradient(160deg, #041610, #0a2a21 52%, #0a231b);
+  background-size: cover, cover, auto, auto, auto;
+  background-position: center, center, center, center, center;
   overflow: hidden;
   position: relative;
 }
