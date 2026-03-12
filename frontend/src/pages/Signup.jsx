@@ -48,7 +48,7 @@ function Signup() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page signup-page">
       <div className="auth-card">
         <h1>Create Account</h1>
         <p>Sign up to start tracking your environmental impact.</p>
