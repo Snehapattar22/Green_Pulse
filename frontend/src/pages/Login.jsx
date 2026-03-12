@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { reportUserLogin } from "../services/api";
 import "../styles/Auth.css";
 
 function Login() {
@@ -22,7 +23,16 @@ function Login() {
 
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const credentials = await signInWithEmailAndPassword(auth, email, password);
+      const user = credentials?.user;
+      const resolvedName = user?.displayName || user?.email?.split("@")[0] || "Anonymous User";
+
+      await reportUserLogin({
+        user_name: resolvedName,
+        email: user?.email || email,
+        auth_provider: user?.providerData?.[0]?.providerId || "firebase-password",
+      }).catch(() => {});
+
       navigate("/app", { replace: true });
     } catch (authError) {
       setError(authError.message);

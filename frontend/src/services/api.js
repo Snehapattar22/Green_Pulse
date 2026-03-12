@@ -30,4 +30,6 @@ export const adminGetUserActivity = (token, userName, limit = 80) =>
     headers: { "X-Admin-Token": token },
   });
 
+export const reportUserLogin = (payload) => API.post("/auth/login-activity", payload);
+
 export const getGlobalLiveData = () => API.get("/global/live");

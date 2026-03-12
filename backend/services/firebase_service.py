@@ -1,18 +1,36 @@
 import firebase_admin
 from firebase_admin import credentials, db
-from config import FIREBASE_CREDENTIAL, FIREBASE_DB_URL
+import os
+import json
+from config import FIREBASE_DB_URL
 
 firebase_enabled = True
 
 try:
     if not firebase_admin._apps:
-        cred = credentials.Certificate(FIREBASE_CREDENTIAL)
-        firebase_admin.initialize_app(cred, {"databaseURL": FIREBASE_DB_URL})
-except Exception:
+
+        # Try getting Firebase key from environment variable (Render)
+        firebase_key = os.getenv("FIREBASE_KEY")
+
+        if firebase_key:
+            # Load Firebase credentials from environment variable
+            cred = credentials.Certificate(json.loads(firebase_key))
+        else:
+            # Load Firebase credentials from local file
+            cred = credentials.Certificate("firebase_key.json")
+
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": FIREBASE_DB_URL
+        })
+
+except Exception as e:
+    print("Firebase initialization error:", e)
     firebase_enabled = False
+
 
 def save_data(temp, humidity, ir_value, co2, reward, timestamp):
     if not firebase_enabled:
+        print("Firebase disabled")
         return
 
     try:
@@ -26,6 +44,6 @@ def save_data(temp, humidity, ir_value, co2, reward, timestamp):
             "reward": reward,
             "timestamp": timestamp
         })
-    except Exception:
-        # Keep API responsive even if Firebase write fails.
-        return
+
+    except Exception as e:
+        print("Firebase write error:", e)

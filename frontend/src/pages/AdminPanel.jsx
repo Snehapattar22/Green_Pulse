@@ -117,6 +117,13 @@ function AdminPanel() {
     return parsed.toLocaleString();
   };
 
+  const formatMetric = (value, suffix = "") => {
+    if (value === null || value === undefined || value === "") {
+      return "--";
+    }
+    return `${value}${suffix}`;
+  };
+
   const handleLogout = () => {
     localStorage.removeItem(ADMIN_TOKEN_KEY);
     navigate("/admin/login", { replace: true });
@@ -208,7 +215,7 @@ function AdminPanel() {
         <article className="module-card admin-users-card">
           <h3>Users</h3>
           <div className="admin-user-list">
-            {users.length === 0 && <p>No user prediction activity yet.</p>}
+            {users.length === 0 && <p>No user activity yet.</p>}
             {users.map((user) => (
               <button
                 type="button"
@@ -217,7 +224,8 @@ function AdminPanel() {
                 onClick={() => handleUserClick(user.name)}
               >
                 <strong>{user.name}</strong>
-                <span>{user.predictions_count} predictions</span>
+                <span>{user.activity_count ?? 0} activities</span>
+                <span>{user.login_count ?? 0} logins</span>
               </button>
             ))}
           </div>
@@ -230,14 +238,19 @@ function AdminPanel() {
           {!loadingActivity && userActivity && (
             <>
               <div className="admin-user-meta">
+                <span>Email: {userActivity.profile?.email ?? "--"}</span>
                 <span>Started: {formatTime(userActivity.profile?.started_at)}</span>
                 <span>Last seen: {formatTime(userActivity.profile?.last_seen)}</span>
                 <span>Latest location: {userActivity.profile?.last_location ?? "--"}</span>
               </div>
               <div className="admin-user-meta">
+                <span>Activities: {userActivity.profile?.activity_count ?? 0}</span>
                 <span>Predictions: {userActivity.profile?.predictions_count ?? 0}</span>
-                <span>Avg CO2: {userActivity.profile?.avg_co2 ?? 0} ppm</span>
-                <span>Best reduction: {userActivity.profile?.best_reduction ?? 0} ppm</span>
+                <span>Logins: {userActivity.profile?.login_count ?? 0}</span>
+              </div>
+              <div className="admin-user-meta">
+                <span>Avg CO2: {formatMetric(userActivity.profile?.avg_co2, " ppm")}</span>
+                <span>Best reduction: {formatMetric(userActivity.profile?.best_reduction, " ppm")}</span>
               </div>
               <ul className="simple-list admin-event-list">
                 {(userActivity.events ?? []).slice(0, 16).map((event, index) => (
@@ -245,8 +258,8 @@ function AdminPanel() {
                     <p>{formatTime(event.timestamp)}</p>
                     <span>Location: {event.location}</span>
                     <span>Measure: {event.measure_taken}</span>
-                    <span>CO2: {event.co2} ppm</span>
-                    <span>Reduction: {event.reduction_vs_previous} ppm</span>
+                    <span>CO2: {formatMetric(event.co2, " ppm")}</span>
+                    <span>Reduction: {formatMetric(event.reduction_vs_previous, " ppm")}</span>
                   </li>
                 ))}
               </ul>
