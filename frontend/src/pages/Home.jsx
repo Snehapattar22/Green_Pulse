@@ -83,6 +83,8 @@ function Home() {
             <div className="carbon-dot d3" />
             <div className="carbon-dot d4" />
             <div className="earth-webgl">
+              <div className="earth-surface" />
+              <div className="earth-clouds" />
               <div className="earth-continent" />
             </div>
           </motion.div>
